@@ -74,12 +74,12 @@ A Ruby script that automatically downloads and organizes YouTube videos as MP3 f
 
 2. Run the script:
    ```
-   ruby youtube_audio_downloader.rb
+   ruby downloader.rb
    ```
 
 3. Command line options:
    ```
-   ruby youtube_audio_downloader.rb --help
+   ruby downloader.rb --help
    
    Options:
      -c, --config PATH : Path to configuration YAML file (default: ./config.yml)
@@ -92,13 +92,13 @@ A Ruby script that automatically downloads and organizes YouTube videos as MP3 f
 
 ```bash
 # Use a different config file
-ruby youtube_audio_downloader.rb --config ~/my_playlists.yml
+ruby downloader.rb --config ~/my_playlists.yml
 
 # Save to a different music directory
-ruby youtube_audio_downloader.rb --output /media/music
+ruby downloader.rb --output /media/music
 
 # Combine multiple options
-ruby youtube_audio_downloader.rb --config ~/playlists/youtube.yml --output /media/external/music --quiet
+ruby downloader.rb --config ~/playlists/youtube.yml --output /media/external/music --quiet
 ```
 
 ## Example Configuration
