@@ -1,0 +1,30 @@
+# Example configuration file for YouTube Audio Downloader
+# 
+# Structure:
+# folder_name:
+#   - youtube_url_1
+#   - youtube_url_2
+#
+# This will create folders inside the music directory and
+# organize downloaded MP3s according to this structure
+
+# Rock Music
+rock:
+  - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+  - https://www.youtube.com/watch?v=ZyhrYis509A
+  - https://www.youtube.com/watch?v=6Ejga4kJUts
+
+# Ambient/Lo-Fi Music
+ambient:
+  - https://www.youtube.com/watch?v=5qap5aO4i9A
+  - https://www.youtube.com/watch?v=DWcJFNfaw9c
+
+# Study Music
+study:
+  - https://www.youtube.com/watch?v=jfKfPfyJRdk
+  - https://www.youtube.com/watch?v=lTRiuFIWV54
+
+# Classical Music
+classical:
+  - https://www.youtube.com/watch?v=EBIKYRXGz2k
+  - https://www.youtube.com/watch?v=GRxofEmo3HA
