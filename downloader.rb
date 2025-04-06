@@ -50,7 +50,7 @@ class YouTubeAudioDownloader
   private
 
   def load_config
-    output "📄 Using config file: #{options[:config_path]}", :info if options[:verbose]
+    output "📄 Using config file: #{options[:config_path]}", :info
     YAML.load_file(options[:config_path])
   rescue Errno::ENOENT
     output "❌ Config file not found: #{options[:config_path]}", :error
@@ -61,7 +61,7 @@ class YouTubeAudioDownloader
   end
 
   def ensure_music_directories
-    output "📂 Using music directory: #{options[:music_dir]}", :info if options[:verbose]
+    output "📂 Using music directory: #{options[:music_dir]}", :info
     FileUtils.mkdir_p(options[:music_dir])
     
     @config.keys.each do |folder_name|
@@ -74,7 +74,7 @@ class YouTubeAudioDownloader
     existing_count = 0
     invalid_count = 0
 
-    output "🔍 Scanning for existing files...", :info if options[:verbose]
+    output "🔍 Scanning for existing files...", :info
 
     @config.each do |folder_name, urls|
       target_dir = File.join(options[:music_dir], folder_name)
@@ -84,7 +84,7 @@ class YouTubeAudioDownloader
         
         if video_id.nil?
           invalid_count += 1
-          output "⚠️  Invalid URL: #{url}", :warning if options[:verbose]
+          output "⚠️  Invalid URL: #{url}", :warning
           next
         end
         
@@ -149,7 +149,7 @@ class YouTubeAudioDownloader
       return
     end
     
-    output "\n🚀 Starting download of #{download_queue.size} new files...", :info if options[:verbose]
+    output "\n🚀 Starting download of #{download_queue.size} new files...", :info
     
     download_queue.each_with_index do |item, index|
       progress = index + 1
@@ -157,7 +157,7 @@ class YouTubeAudioDownloader
       update_progress_bar(progress, download_queue.size, item[:video_id])
       download_result = download_file(item)
       
-      if options[:verbose] && !download_result
+      if !download_result
         output "  ❌ Failed to download: #{item[:video_id]}", :error
       end
     end
@@ -182,25 +182,24 @@ class YouTubeAudioDownloader
     video_id = item[:video_id]
     target_dir = item[:target_dir]
     
-    output "\n  ↓ Downloading: #{item[:folder]}/#{video_id}", :info if options[:verbose]
+    output "\n  ↓ Downloading: #{item[:folder]}/#{video_id}", :info
     
     output_template = File.join(target_dir, "%(title)s [#{video_id}].%(ext)s")
     
     cmd = [
       'yt-dlp',
       '-x',
+      '--quiet', # remove if you want to have yt-dlp logs
       '--audio-format', 'mp3',
       '-o', output_template,
     ]
-    
-    # Add quiet flag if not in verbose mode
-    cmd << '--quiet' unless options[:verbose]
+
     cmd << url
     
     success = system(*cmd)
     return success
   rescue => e
-    output "  🔥 Error: #{e.message}", :error if options[:verbose]
+    output "  🔥 Error: #{e.message}", :error
     false
   end
 
